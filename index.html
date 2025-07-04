@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Chess Introvert</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <h1>Chess Introvert by Leeroy Mupereki</h1>
+  <div id="board"></div>
+  <div class="controls">
+    <button onclick="undoMove()">Undo</button>
+    <button onclick="restartGame()">Restart</button>
+    <select id="difficulty" onchange="changeDifficulty(this.value)">
+      <option value="1">Beginner</option>
+      <option value="2">Advanced</option>
+      <option value="3">Master</option>
+      <option value="4">Expert</option>
+      <option value="5">Grandmaster</option>
+    </select>
+    <button onclick="toggleSound()">Sound</button>
+    <span id="timer">00:00</span>
+  </div>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/chess.js/1.0.0/chess.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/chessboard.js/1.0.0/chessboard.min.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
