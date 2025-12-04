@@ -1,29 +1,83 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Chess Introvert</title>
-  <link rel="stylesheet" href="style.css" />
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Chess Introvert — Shanduko</title>
+
+  <!-- PWA manifest + theme -->
+  <link rel="manifest" href="/manifest.json">
+  <meta name="theme-color" content="#000000" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <link rel="apple-touch-icon" href="/assets/icons/icon-192.png">
+
+  <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
-  <h1>Chess Introvert by Leeroy Mupereki</h1>
-  <div id="board"></div>
-  <div class="controls">
-    <button onclick="undoMove()">Undo</button>
-    <button onclick="restartGame()">Restart</button>
-    <select id="difficulty" onchange="changeDifficulty(this.value)">
-      <option value="1">Beginner</option>
-      <option value="2">Advanced</option>
-      <option value="3">Master</option>
-      <option value="4">Expert</option>
-      <option value="5">Grandmaster</option>
-    </select>
-    <button onclick="toggleSound()">Sound</button>
-    <span id="timer">00:00</span>
-  </div>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/chess.js/1.0.0/chess.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/chessboard.js/1.0.0/chessboard.min.js"></script>
-  <script src="script.js"></script>
+  <header class="app-header">
+    <div class="brand">
+      <img src="assets/logos/logo-1.svg" alt="Shanduko" class="app-logo">
+      <h1>Chess Introvert</h1>
+    </div>
+
+    <div class="header-actions">
+      <div class="sound-controls">
+        <button id="btn-sound" title="Toggle sounds" aria-label="Toggle sound">
+          <span id="sound-icon">🔊</span>
+        </button>
+        <button id="btn-music" title="Play/Pause music" aria-label="Toggle music">♫</button>
+      </div>
+    </div>
+  </header>
+
+  <main class="container">
+    <section id="board" aria-label="Chess board"></section>
+
+    <section class="controls">
+      <div class="left-controls">
+        <label for="difficulty">AI difficulty</label>
+        <select id="difficulty" aria-label="Choose difficulty">
+          <option value="1">Beginner</option>
+          <option value="2">Advanced</option>
+          <option value="3">Master</option>
+          <option value="4">Expert</option>
+          <option value="5">Grandmaster</option>
+        </select>
+
+        <div id="difficulty-indicator" class="difficulty-indicator">
+          <span class="dot"></span>
+          <span class="text">Beginner</span>
+        </div>
+      </div>
+
+      <div class="right-controls">
+        <button id="btn-undo">Undo</button>
+        <button id="btn-restart">Restart</button>
+        <div id="timer">00:00</div>
+      </div>
+    </section>
+
+    <section class="game-log">
+      <h3>Move list</h3>
+      <ol id="moves"></ol>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <small>Shanduko — Chess Introvert</small>
+  </footer>
+
+  <script src="js/script.js" defer></script>
+
+  <!-- Service worker registration (PWA) -->
+  <script>
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => {
+        navigator.serviceWorker.register('/service-worker.js').then(() => {
+          console.log('Service worker registered');
+        }).catch(console.error);
+      });
+    }
+  </script>
 </body>
 </html>
